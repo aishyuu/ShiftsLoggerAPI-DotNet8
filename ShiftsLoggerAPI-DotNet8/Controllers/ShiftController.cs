@@ -60,7 +60,25 @@ namespace ShiftsLoggerAPI_DotNet8.Controllers
             shift.StartTime = updatedShift.StartTime;
             shift.EndTime = updatedShift.EndTime;
 
+            await _context.SaveChangesAsync();
+
             return Ok(await _context.Shifts.ToListAsync());
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<List<Shift>>> DeleteShift(int id)
+        {
+            var shift = await _context.Shifts.FindAsync(id);
+            if (shift is null)
+            {
+                return NotFound("Shift has not been found");
+            }
+
+            _context.Shifts.Remove(shift);
+
+            _context.SaveChanges();
+
+            return (await _context.Shifts.ToListAsync());
         }
     }
 }
