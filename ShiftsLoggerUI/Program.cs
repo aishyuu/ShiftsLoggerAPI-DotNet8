@@ -1,2 +1,17 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Newtonsoft.Json;
+using ShiftsLoggerUI.Models;
+using ShiftsLoggerUI.UiUtility;
+
+HttpClient client = new HttpClient();
+
+bool isRunning = true;
+
+while (isRunning)
+{
+    string userChoice = Utility.userChoice();
+
+    switch(userChoice)
+    {
+
+    }
+}
