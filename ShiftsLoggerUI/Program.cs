@@ -2,6 +2,7 @@
 using ShiftsLoggerUI;
 using ShiftsLoggerUI.Models;
 using ShiftsLoggerUI.UiUtility;
+using Spectre.Console;
 
 HttpClient client = new HttpClient();
 
@@ -19,6 +20,9 @@ while (isRunning)
             break;
 
         case "View One Shift":
+            var id = AnsiConsole.Ask<int>("Insert [green]id[/]");
+            var shift = await ApiCalls.GetSingleShift(client, id);
+            Utility.displayShift(shift);
             break;
 
         case "Add a Shift":

@@ -42,4 +42,18 @@ internal class Utility
         
         AnsiConsole.Write(table);
     }
+
+    public static void displayShift(Shift shift)
+    {
+        var table = new Table();
+        table.AddColumns(new[] { "Id", "Date", "Name", "Hours", "Duration" });
+
+        table.AddRow($"{shift.Id.ToString()}",
+            shift.StartTime.Date.ToString(),
+            $"{shift.EmployeeFirstName} {shift.EmployeeLastName}",
+            $"{shift.StartTime.ToString("t")} - {shift.EndTime.ToString("t")}",
+            $"{(shift.EndTime - shift.StartTime).TotalHours.ToString()}");
+
+        AnsiConsole.Write(table);
+    }
 }
