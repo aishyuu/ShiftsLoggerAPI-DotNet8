@@ -37,6 +37,7 @@ while (isRunning)
             break;
 
         case "Delete a Shift":
+            var deleteId = AnsiConsole.Ask<int>("Insert [green]id[/]");
             break;
     }
 }

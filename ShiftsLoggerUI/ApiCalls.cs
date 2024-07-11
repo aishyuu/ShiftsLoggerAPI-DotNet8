@@ -58,4 +58,18 @@ internal class ApiCalls
             AnsiConsole.MarkupInterpolated($"[red]Mistakes were made![/]\n");
         }
     }
+
+    public static async void DeleteShift(HttpClient client, int id)
+    {
+        using HttpResponseMessage response = await client.DeleteAsync($"https://localhost:7004/api/Shift?id={id}");
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            AnsiConsole.MarkupInterpolated($"[green]Successful Deletion[/]\n");
+        }
+
+        if (response.StatusCode == HttpStatusCode.BadRequest)
+        {
+            AnsiConsole.MarkupInterpolated($"[red]Mistakes were made![/]\n");
+        }
+    }
 }
