@@ -26,9 +26,14 @@ while (isRunning)
             break;
 
         case "Add a Shift":
+            var newShift = Utility.createNewShift();
+            ApiCalls.AddNewShift(client, newShift);
             break;
 
         case "Update a Shift":
+            var updateId = AnsiConsole.Ask<int>("Insert [green]id[/]");
+            var updateShift = await ApiCalls.GetSingleShift(client, updateId);
+            var updatedShift = Utility.UpdateShift(updateShift);
             break;
 
         case "Delete a Shift":

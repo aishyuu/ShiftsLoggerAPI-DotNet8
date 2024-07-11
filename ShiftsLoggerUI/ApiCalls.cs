@@ -2,6 +2,7 @@
 using ShiftsLoggerUI.Models;
 using Spectre.Console;
 using System.Net;
+using System.Net.Http.Json;
 
 namespace ShiftsLoggerUI;
 
@@ -28,5 +29,33 @@ internal class ApiCalls
         Shift jsonResponse = JsonConvert.DeserializeObject<Shift>(stringResponse);
 
         return jsonResponse;
+    }
+
+    public static async void AddNewShift(HttpClient client, Shift newShift)
+    {
+        using HttpResponseMessage response = await client.PostAsJsonAsync($"https://localhost:7004/api/Shift", newShift);
+        if(response.StatusCode == HttpStatusCode.OK)
+        {
+            AnsiConsole.MarkupInterpolated($"[green]Successful Addition[/]\n");
+        }
+
+        if (response.StatusCode == HttpStatusCode.BadRequest)
+        {
+            AnsiConsole.MarkupInterpolated($"[red]Mistakes were made![/]\n");
+        }
+    }
+
+    public static async void UpdateShift(HttpClient client, Shift updatedShift)
+    {
+        using HttpResponseMessage response = await client.PutAsJsonAsync($"https://localhost:7004/api/Shift", updatedShift);
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            AnsiConsole.MarkupInterpolated($"[green]Successful Update[/]\n");
+        }
+
+        if (response.StatusCode == HttpStatusCode.BadRequest)
+        {
+            AnsiConsole.MarkupInterpolated($"[red]Mistakes were made![/]\n");
+        }
     }
 }
